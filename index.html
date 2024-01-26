@@ -81,8 +81,8 @@
                       break;
                     }
                   }
-                  var prefix = current.substring(0,i+1);
-                  //content = content.replace(regex,'img src=\"'+prefix+'$1\" alt=\"$2\" style=\"$3\" /');
+                  var prefix = current.substring(1,i+1);
+                  content = content.replace(regex,'img src=\"'+prefix+'$1\" alt=\"$2\" style=\"$3\" /');
                   return content;
                 })
                 hook.afterEach(function (html){return html + footer;});
