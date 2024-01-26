@@ -81,7 +81,7 @@
                       break;
                     }
                   }
-                  var prefix = current.substring(0,i+1);
+                  var prefix = 'NKUAI.ICU'+current.substring(0,i+1);
                   content = content.replace(regex,'img src=\"'+prefix+'$1\" alt=\"$2\" style=\"$3\" /');
                   return content;
                 })
