@@ -2,22 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>NKUAI.ICU</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <!--Visitors Counter-->
+  <script type="module">
+    // Alternative CDN (https://www.skypack.dev/view/uptime-widget)
+    import "https://cdn.skypack.dev/uptime-widget";
+  </script>
 </head>
 <body>
 <div id="app">Please wait...</div>
   <script>
     window.$docsify = {
-      name: '',
-      repo: '',
-      loadSidebar: true
+      name: 'NKUAI.ICU',
+      repo: 'BreezeConfirmingWms/NKUAI.ICU',
+      loadSidebar: true,
+      loadNavbar: true,
+      subMaxLevel: 6,
+      sidebarDisplayLevel:1,
+      search: {
+        maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+        paths: 'auto', // 默认搜索所有路径
+        placeholder: '搜索', // 搜索框占位符
+        noData: '找不到结果', // 搜索结果为空时的提示
+        depth: 4, // 搜索标题的最大层级
+        hideOtherSidebarContent: false, // 是否隐藏其他侧边栏内容
+        namespace: 'docsify', // 用于区分多个文档项目的命名空间
+      },
+
+      plugins:[
+              function (hook){
+                var footer = [
+                        '<hr/>',
+                        '<footer>',
+                        '<strong>Maintainer: <a href="https://github.com/BreezeConfirmingWms" target="_blank">@BreezeConfirmingWms</a>, <a href="https://github.com/zheguabaoshuma" target="_blank">@zheguabaoshuma</a> </strong>',
+                        '<br>','<br>','<p>Server status in the last 90 days</p>',
+                        '<uptime-widget\n' +
+                        '  serverURL="https://status.ably.com/embed/uptime.json"\n' +
+                        '  href="https://status.ably.com"\n' +
+                        '  text="visit status site"\n' +
+                        '/>',
+                        '</footer>'
+                ].join('');
+                hook.afterEach(function (html){return html + footer;});
+              }
+      ]
     }
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!--Search Bar-->
+  <script src = "//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js "></script>
+
+  <!--Gittalk-->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+  <script>
+    const gitalk = new Gitalk({
+      clientID: 'c37394f77a89b8f06a22',
+      clientSecret: '2b45bf4c4dc496b2fa84384e1fbdb965ade03f18',
+      repo: 'NKUAI.ICU',
+      owner: 'BreezeConfirmingWms',
+      admin: ['BreezeConfirmingWms','zheguabaoshuma'],
+      // facebook-like distraction free mode
+      distractionFreeMode: false
+    })
+</script>
+
+  <!--Sidebar Collapse-->
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+
+  <!--Back2Top-->
+  <script src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/jquery.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/jquery.goup.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $.goup({
+        trigger: 100,
+        bottomOffset: 52,
+        locationOffset: 25,
+        title: 'back to top',
+        titleAsText: true
+      });
+    });
+  </script>
 </body>
 </html>
