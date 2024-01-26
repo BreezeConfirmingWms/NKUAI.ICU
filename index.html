@@ -19,6 +19,8 @@
     window.$docsify = {
       name: 'NKUAI.ICU',
       repo: 'BreezeConfirmingWms/NKUAI.ICU',
+      relativePath: true,
+      basePath: '/',
       loadSidebar: true,
       loadNavbar: true,
       subMaxLevel: 6,
@@ -32,9 +34,35 @@
         hideOtherSidebarContent: false, // 是否隐藏其他侧边栏内容
         namespace: 'docsify', // 用于区分多个文档项目的命名空间
       },
-
+      copyCode: {
+        buttonText: {
+          '/zh-cn/': '点击复制',
+          '/ru/': 'Скопировать в буфер обмена',
+          '/de-de/': 'Klicken Sie zum Kopieren',
+          '/es/': 'Haga clic para copiar',
+          '/': 'Copy to clipboard',
+        },
+        errorText: {
+          '/zh-cn/': '错误',
+          '/ru/': 'ошибка',
+          '/': 'Error',
+        },
+        successText: {
+          '/zh-cn/': '复制',
+          '/ru/': 'Скопировано',
+          '/de-de/': 'Kopiert',
+          '/es/': 'Copiado',
+          '/': 'Copied',
+        },
+      },
+      count:{
+        countable:true,
+        fontsize:'0.8em',
+        color:'rgb(90,90,90)',
+        language:'chinese'
+      },
       plugins:[
-              function (hook){
+              function (hook, vm){
                 var footer = [
                         '<hr/>',
                         '<footer>',
@@ -47,6 +75,18 @@
                         '/>',
                         '</footer>'
                 ].join('');
+                hook.beforeEach(function (content){
+                  var regex = /img src="(.*)" alt="(.*)" style="(.*)" \//g;
+                  var current = vm.route.path;
+                  for (var i = current.length;i > 0;i--){
+                    if(current[i] === '/'){
+                      break;
+                    }
+                  }
+                  var prefix = current.substring(0,i+1);
+                  content = content.replace(regex,'img src=\"'+prefix+'$1\" alt=\"$2\" style=\"$3\" /');
+                  return content;
+                })
                 hook.afterEach(function (html){return html + footer;});
               }
       ]
@@ -91,5 +131,25 @@
       });
     });
   </script>
+  <!--Copy Code-->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+
+  <!-- Larger Picture -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+
+  <!-- Word Count -->
+  <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+
+  <!--Script Highlight-->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-php.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-latex.min.js"></script>
+
+  <!--Emoji-->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+  <!--Image Zoom-->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
 </body>
 </html>
